@@ -1,10 +1,6 @@
 import {extend} from '../../../utils';
 import {SET_CURRENT_CITY} from './actions.js';
-/*
-const initialState = {
-  currentCityName: `Amsterdam`,
-};
-*/
+
 const initialState = {};
 
 const appLogic = (state = initialState, action) => {

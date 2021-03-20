@@ -24,34 +24,9 @@ const CitiesList = ({currentCityName}) => {
 
 const mapStateToProps = ({LOGIC}) => ({currentCityName: LOGIC.currentCityName});
 
+CitiesList.propTypes = {
+  currentCityName: PropTypes.string.isRequired,
+};
+
 export {CitiesList};
 export default connect(mapStateToProps)(CitiesList);
-
-/*
-const CitiesList = ({cityName}) => {
-  const cityNames = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
-  const elementClassName = `locations__item-link tabs__item`;
-  return (
-    <div className="tabs">
-      <section className="locations container">
-        <ul className="locations__list tabs__list">
-          {cityNames.map((name, id) => {
-            return (
-              <CityTab key={`city-${id}`} cityName={name} tabClassName={name === cityName ? elementClassName + ` tabs__item--active` : elementClassName}/>
-            );
-          })}
-        </ul>
-      </section>
-    </div>
-  );
-};
-
-const mapStateToProps = ({LOGIC}) => ({cityName: LOGIC.cityName});
-
-CitiesList.propTypes = {
-  cityName: PropTypes.string.isRequired,
-};
-
-export default CitiesList;
-export default connect(mapStateToProps)(CitiesList)
-*/
