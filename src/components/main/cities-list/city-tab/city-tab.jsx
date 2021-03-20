@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {setCurrentCity} from '../../store/reducers/action-creator.js';
+import {setCurrentCity} from '../../../../store/reducers/action-creator.js';
 
 const CityTab = ({cityName, tabClassName, changeCurrentCity}) => {
   const handleClick = () => {

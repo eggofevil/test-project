@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import CityTab from '../city-tab/city-tab.jsx';
+import CityTab from './city-tab/city-tab.jsx';
 
 const CitiesList = ({currentCityName}) => {
   const cityNames = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];

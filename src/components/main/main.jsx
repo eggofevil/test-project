@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CitiesList from '../cities-list/cities-list';
+import CitiesList from './cities-list/cities-list';
 
 const Main = () => {
   return (
