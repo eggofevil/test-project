@@ -8,7 +8,7 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 
 import rootReducer from './store/reducers/root-reducer';
 import App from './components/app/app';
-import {getCurrentCity} from './store/api-actions';
+import {getHotels} from './store/api-actions';
 
 const api = createAPI();
 
@@ -21,7 +21,7 @@ const store = createStore(
   )
 );
 
-store.dispatch(getCurrentCity());
+store.dispatch(getHotels());
 
 ReactDOM.render(
   <Provider store={store}>

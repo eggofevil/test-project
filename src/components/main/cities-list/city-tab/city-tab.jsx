@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {setCurrentCity} from '../../../../store/reducers/action-creator.js';
+import {setCurrentCityAndCityOffers} from '../../../../store/reducers/data/action-creator.js';
 
 const CityTab = ({cityName, tabClassName, changeCurrentCity}) => {
   const handleClick = () => {
@@ -25,7 +25,7 @@ CityTab.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   changeCurrentCity(cityName) {
-    dispatch(setCurrentCity(cityName));
+    dispatch(setCurrentCityAndCityOffers(cityName));
   }
 });
 

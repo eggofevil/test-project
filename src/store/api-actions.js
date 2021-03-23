@@ -1,9 +1,9 @@
-import {setCurrentCity} from './reducers/action-creator.js';
+import {setOffers, setCurrentCityAndCityOffers} from './reducers/data/action-creator.js';
 
-export const getCurrentCity = () => (dispatch, _getState, api) => (
-  api.get(`/hotels/145`)
+export const getHotels = () => (dispatch, _getState, api) => (
+  api.get(`/hotels`)
     .then(({data}) => {
-      dispatch(setCurrentCity(data.city.name));
+      dispatch(setOffers(data));
+      dispatch(setCurrentCityAndCityOffers(data[0].city.name));
     })
-    .catch(()=>{})
 );

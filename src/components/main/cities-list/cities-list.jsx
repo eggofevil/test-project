@@ -22,7 +22,7 @@ const CitiesList = ({currentCityName}) => {
   );
 };
 
-const mapStateToProps = ({LOGIC}) => ({currentCityName: LOGIC.currentCityName});
+const mapStateToProps = ({DATA}) => ({currentCityName: DATA.currentCityName});
 
 CitiesList.propTypes = {
   currentCityName: PropTypes.string.isRequired,
