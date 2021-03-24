@@ -2,9 +2,9 @@ import {extend} from '../../../utils';
 import {SET_OFFERS, SET_CURRENT_CITY_AND_CITY_OFFERS} from './actions.js';
 
 const initialState = {
-  offers: null,
+  offers: [],
   currentCityName: `Amsterdam`,
-  currentCityOffers: null
+  currentCityOffers: []
 };
 
 const data = (state = initialState, action) => {
@@ -16,7 +16,7 @@ const data = (state = initialState, action) => {
   case SET_CURRENT_CITY_AND_CITY_OFFERS:
     return extend(state, {
       currentCityName: action.payload,
-      cityOffers: state.offers.filter((offer) => offer.city.name === action.payload)
+      currentCityOffers: state.offers.filter((offer) => offer.city.name === action.payload)
     });
   default:
     return state;

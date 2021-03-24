@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import CityTab from './city-tab/city-tab.jsx';
 
-const CitiesList = ({currentCityName}) => {
+const CitiesPane = ({currentCityName}) => {
   const cityNames = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
   const elementClassName = `locations__item-link tabs__item`;
   return (
@@ -24,9 +24,9 @@ const CitiesList = ({currentCityName}) => {
 
 const mapStateToProps = ({DATA}) => ({currentCityName: DATA.currentCityName});
 
-CitiesList.propTypes = {
+CitiesPane.propTypes = {
   currentCityName: PropTypes.string.isRequired,
 };
 
-export {CitiesList};
-export default connect(mapStateToProps)(CitiesList);
+export {CitiesPane};
+export default connect(mapStateToProps)(CitiesPane);

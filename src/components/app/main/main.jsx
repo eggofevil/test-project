@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CitiesList from './cities-list/cities-list.jsx';
+import CitiesPane from './cities-pane/cities-pane.jsx';
 import OffersContainer from './offers-container/offers-container.jsx';
 
 const Main = () => {
@@ -25,7 +25,7 @@ const Main = () => {
       </header>
       <main className="page__main page__main--index page__main--index-empty">
         <h1 className="visually-hidden">Cities</h1>
-        <CitiesList />
+        <CitiesPane />
         <OffersContainer />
       </main>
     </div>
