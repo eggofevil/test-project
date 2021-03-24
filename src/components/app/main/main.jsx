@@ -1,5 +1,6 @@
 import React from 'react';
 
+import UserPane from './user-pane/user-pane.jsx';
 import CitiesPane from './cities-pane/cities-pane.jsx';
 import OffersContainer from './offers-container/offers-container.jsx';
 
@@ -17,6 +18,7 @@ const Main = () => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
+                  <UserPane />
                 </li>
               </ul>
             </nav>
