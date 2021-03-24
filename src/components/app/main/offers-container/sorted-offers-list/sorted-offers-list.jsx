@@ -27,7 +27,7 @@ const SortedOffersList = ({currentCityOffers, sortingType}) => {
       offersListClassName="cities__places-list tabs__content"
       offerCardArticleClassName="cities__place-card"
       offerCardDivClassName="cities__image-wrapper"
-      currentCityOffers={sortedCurrentCityOffers}
+      offers={sortedCurrentCityOffers}
     />
   );
 };

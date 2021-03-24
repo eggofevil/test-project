@@ -5,10 +5,10 @@ import OfferCard from './offer-card/offer-card.jsx';
 
 import offerPropTypes from '../../../prop-types/offer.proptypes.js';
 
-const OffersList = ({currentCityOffers, offersListClassName, offerCardArticleClassName, offerCardDivClassName}) => {
+const OffersList = ({offers, offersListClassName, offerCardArticleClassName, offerCardDivClassName}) => {
   return (
     <div className={`places__list ` + offersListClassName}>
-      {currentCityOffers.map((offer, i) => (
+      {offers.map((offer, i) => (
         <OfferCard
           key={`offer-${i}`}
           offerCardArticleClassName={offerCardArticleClassName}
@@ -21,10 +21,10 @@ const OffersList = ({currentCityOffers, offersListClassName, offerCardArticleCla
 };
 
 OffersList.propTypes = {
+  offers: PropTypes.arrayOf(offerPropTypes.isRequired).isRequired,
   offersListClassName: PropTypes.string.isRequired,
   offerCardArticleClassName: PropTypes.string.isRequired,
   offerCardDivClassName: PropTypes.string.isRequired,
-  currentCityOffers: PropTypes.arrayOf(offerPropTypes.isRequired).isRequired,
 };
 
 export default OffersList;
