@@ -19,7 +19,15 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: `babel-loader`,
-        },
+        }
+      },
+      {
+        test: /\.css$/i,
+        use: [`style-loader`, `css-loader`]
+      },
+      {
+        test: /\.png$/i,
+        use: [`file-loader`]
       }
     ],
   },
