@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import SortingPane from './sorting-pane/sorting-pane.jsx';
 import SortedOffersList from './sorted-offers-list/sorted-offers-list.jsx';
-import CityMap from './city-map/city-map.jsx';
+import CityMap from '../../shared/city-map/city-map.jsx';
 
 import offerPropTypes from '../../../prop-types/offer.proptypes.js';
 

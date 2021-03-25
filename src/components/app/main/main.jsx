@@ -1,6 +1,6 @@
 import React from 'react';
 
-import UserPane from './user-pane/user-pane.jsx';
+import UserPane from '../shared/user-pane/user-pane.jsx';
 import CitiesPane from './cities-pane/cities-pane.jsx';
 import OffersContainer from './offers-container/offers-container.jsx';
 

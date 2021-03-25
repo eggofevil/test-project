@@ -2,9 +2,9 @@ import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
-import '../../../../../../node_modules/leaflet/dist/leaflet.css';
+import '../../../../../node_modules/leaflet/dist/leaflet.css';
 
-import offerPropTypes from '../../../../prop-types/offer.proptypes.js';
+import offerPropTypes from '../../../prop-types/offer.proptypes.js';
 
 const CityMap = ({mapClassName, location, offers, activeCard}) => {
   const [map, setMap] = useState(null);

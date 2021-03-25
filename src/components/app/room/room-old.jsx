@@ -1,20 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import UserPane from '../shared/user-pane/user-pane.jsx';
-// import MainPageLink from '../main-page-link/main-page-link';
+import withReviewForm from '../../hocs/with-review-form';
+import withCityMap from '../../hocs/with-city-map';
+import withReviewsList from '../../hocs/with-reviews-list';
 
-// import ReviewsList from '../reviews-list/reviews-list';
-// import ReviewForm from '../review-form/review-form';
-import OffersList from '../shared/offers-list/offers-list.jsx';
+import ReviewsList from '../reviews-list/reviews-list';
+import ReviewForm from '../review-form/review-form';
+import OffersList from '../offers-list/offers-list';
+import UserInfo from '../user-info/user-info';
+import MainPageLink from '../main-page-link/main-page-link';
+import CityMap from '../city-map/city-map';
 
+import {RATING_BAR_DIVISION} from '../../const';
 
-import CityMap from '../shared/city-map/city-map.jsx';
+import offerPropTypes from '../prop-types/offer-prop-types';
 
-import {RATING_BAR_DIVISION} from '../../../const';
-
-import offerPropTypes from '../../prop-types/offer.proptypes.js';
-
+const ExtendedReviewsList = withReviewsList(ReviewsList);
+const ExtendedReviewForm = withReviewForm(ReviewForm);
+const ExtendedCityMap = withCityMap(CityMap);
 const Room = ({state: {cityOffers, offer}}) => {
   window.scroll(0, 0);
   const hostAvatarClassName = offer.host[`is_pro`] ?
@@ -26,12 +30,12 @@ const Room = ({state: {cityOffers, offer}}) => {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              {/* <MainPageLink /> */}
+              <MainPageLink />
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <UserPane />
+                  <UserInfo />
                 </li>
               </ul>
             </nav>
@@ -116,24 +120,21 @@ const Room = ({state: {cityOffers, offer}}) => {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                {/* <ExtendedReviewsList offerId={offer.id} />
-                <ExtendedReviewForm offerId={offer.id} /> */}
+                <ExtendedReviewsList offerId={offer.id} />
+                <ExtendedReviewForm offerId={offer.id} />
               </section>
             </div>
           </div>
-          {/*
-          <CityMap
+          <ExtendedCityMap
             mapClassName="property"
             location={offer.location}
             cityOffers={cityOffers}
             selectedOfferId={offer.id}
           />
-          */}
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            {/*
             <OffersList
               offersListClassName="near-places__list"
               offerCardArticleClassName="near-places__card"
@@ -141,7 +142,6 @@ const Room = ({state: {cityOffers, offer}}) => {
               cityOffers={cityOffers}
               selectedOfferId={offer.id}
             />
-            */}
           </section>
         </div>
       </main>
