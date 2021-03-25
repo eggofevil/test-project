@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import UserPane from '../shared/user-pane/user-pane.jsx';
-// import MainPageLink from '../main-page-link/main-page-link';
+import MainPageLink from '../shared/main-page-link/main-page-link.jsx';
 
 // import ReviewsList from '../reviews-list/reviews-list';
 // import ReviewForm from '../review-form/review-form';
@@ -26,7 +26,7 @@ const Room = ({state: {cityOffers, offer}}) => {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              {/* <MainPageLink /> */}
+              <MainPageLink />
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
