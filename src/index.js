@@ -6,9 +6,9 @@ import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
-import rootReducer from './store/reducers/root-reducer';
-import App from './components/app/app';
-import {getHotels} from './store/api-actions';
+import rootReducer from './store/reducers/root-reducer.js';
+import App from './components/app/app.jsx';
+import {getHotels} from './store/api-actions.js';
 
 const api = createAPI();
 

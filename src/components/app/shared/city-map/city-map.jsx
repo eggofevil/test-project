@@ -6,7 +6,7 @@ import '../../../../../node_modules/leaflet/dist/leaflet.css';
 
 import offerPropTypes from '../../../prop-types/offer.proptypes.js';
 
-const CityMap = ({mapClassName, location, offers, activeCard}) => {
+const CityMap = ({mapClassName, location, offers, activeCard, selectedOffer}) => {
   const [map, setMap] = useState(null);
 
   const inactivePin = leaflet.icon({
@@ -17,6 +17,10 @@ const CityMap = ({mapClassName, location, offers, activeCard}) => {
     iconUrl: `img/pin-active.svg`,
     iconSize: [30, 40]
   });
+
+  const addIcon = (latitude, longitude, icon) => {
+    leaflet.marker([latitude, longitude], {icon}).addTo(map);
+  };
 
   useEffect(() => {
     const newMap = leaflet.map(`map`, {
@@ -39,8 +43,14 @@ const CityMap = ({mapClassName, location, offers, activeCard}) => {
 
   useEffect(() => {
     if (map) {
+      let icon;
+      if (mapClassName === `property`) {
+        icon = activePin;
+        addIcon(selectedOffer.location.latitude, selectedOffer.location.longitude, icon);
+        icon = inactivePin;
+      }
       offers.map((offer) => {
-        const icon = offer.id === activeCard ? activePin : inactivePin;
+        icon = offer.id === activeCard && mapClassName === `cities` ? activePin : inactivePin;
         leaflet.marker([offer.location.latitude, offer.location.longitude], {icon}).addTo(map);
       });
     }
@@ -52,6 +62,7 @@ const CityMap = ({mapClassName, location, offers, activeCard}) => {
 };
 
 CityMap.propTypes = {
+  mapClassName: PropTypes.string.isRequired,
   location: PropTypes.shape({
     latitude: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,
@@ -59,7 +70,7 @@ CityMap.propTypes = {
   }).isRequired,
   offers: PropTypes.arrayOf(offerPropTypes.isRequired).isRequired,
   activeCard: PropTypes.number,
-  mapClassName: PropTypes.string.isRequired
+  selectedOffer: offerPropTypes
 };
 
 const mapStateToProps = ({LOGIC}) => ({activeCard: LOGIC.activeCard});
