@@ -20,7 +20,22 @@ const CityMap = ({mapClassName, location, offers, activeCard, selectedOffer}) =>
     iconSize: [30, 40]
   });
 
-  const addMarker = (lat, long, icon) => leaflet.marker([lat, long], {icon});
+  const createMarkerLayer = (lat, long, icon) => leaflet.marker([lat, long], {icon});
+  const removePreviousLayer = (previousLayer) => {
+    if (previousLayer) {
+      setMap(map.removeLayer(previousLayer));
+    }
+  };
+  const applyActiveMarkerLayer = (prop) => {
+    if (map) {
+      removePreviousLayer(activeMarkerLayer);
+      if (prop) {
+        const newActiveMarkerLayer = createMarkerLayer(prop.location.latitude, prop.location.longitude, activeMarker);
+        setActiveMarkerLayer(newActiveMarkerLayer);
+        setMap(map.addLayer(newActiveMarkerLayer));
+      }
+    }
+  };
 
   useEffect(() => {
     const newMap = leaflet.map(`map`, {
@@ -32,6 +47,7 @@ const CityMap = ({mapClassName, location, offers, activeCard, selectedOffer}) =>
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       });
     newMap.addLayer(titleLayer);
+    newMap.setView([location.latitude, location.longitude], location.zoom);
     setMap(newMap);
   }, []);
 
@@ -43,32 +59,23 @@ const CityMap = ({mapClassName, location, offers, activeCard, selectedOffer}) =>
 
   useEffect(() => {
     if (map) {
-      if (markersLayer) {
-        setMap(map.removeLayer(markersLayer));
-      }
+      removePreviousLayer(markersLayer);
       const newMarkersLayer = leaflet.layerGroup();
       offers.map((offer) => {
-        newMarkersLayer.addLayer(addMarker(offer.location.latitude, offer.location.longitude, inactiveMarker));
+        newMarkersLayer.addLayer(createMarkerLayer(offer.location.latitude, offer.location.longitude, inactiveMarker));
       });
       setMarkersLayer(newMarkersLayer);
       setMap(map.addLayer(newMarkersLayer));
     }
-  }, [map, location]);
+  }, [map, offers]);
 
   useEffect(() => {
-    if (map) {
-      if (activeMarkerLayer) {
-        setMap(map.removeLayer(activeMarkerLayer));
-      }
-      if (activeCard) {
-        console.log(map);
-      }
-    }
+    applyActiveMarkerLayer(activeCard);
   }, [activeCard]);
 
   useEffect(() => {
-    // тут будет город заложен! Ну, надо придумать как подсветить активное предложение
-  });
+    applyActiveMarkerLayer(selectedOffer);
+  }, [map, selectedOffer]);
 
   return (
     <section id="map" className={`${mapClassName}__map map`} />
