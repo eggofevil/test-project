@@ -1,6 +1,6 @@
 {
   "name": "test-project",
-  "homepage": "https://eggofevil.github.io/test-project",
+  "homepage": "https://eggofevil.github.io/test-project/",
   "version": "1.0.0",
   "description": "project for testing various things",
   "main": "index.js",

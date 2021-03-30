@@ -8,7 +8,7 @@ import TestComponent from './test-component/test-component-2.jsx';
 
 const App = () => {
   return (
-    <BrowserRouter basename="/test-project">
+    <BrowserRouter basename={window.location.pathname || ``}>
       <Switch>
         <Route exact path="/">
           <Main />
