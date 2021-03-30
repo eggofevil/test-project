@@ -7,20 +7,21 @@ import '../../../../../node_modules/leaflet/dist/leaflet.css';
 import offerPropTypes from '../../../prop-types/offer.proptypes.js';
 
 const CityMap = ({mapClassName, location, offers, activeCard, selectedOffer}) => {
+  console.log(`rerender CityMap`);
   const [map, setMap] = useState(null);
-  const [markersLayer, setMarkersLayer] = useState(null);
-  const [activeMarkerLayer, setActiveMarkerLayer] = useState(null);
 
-  const inactiveMarker = leaflet.icon({
+  const inactivePin = leaflet.icon({
     iconUrl: `img/pin.svg`,
     iconSize: [30, 40]
   });
-  const activeMarker = leaflet.icon({
+  const activePin = leaflet.icon({
     iconUrl: `img/pin-active.svg`,
     iconSize: [30, 40]
   });
 
-  const addMarker = (lat, long, icon) => leaflet.marker([lat, long], {icon});
+  const addIcon = (latitude, longitude, icon) => {
+    leaflet.marker([latitude, longitude], {icon}).addTo(map);
+  };
 
   useEffect(() => {
     const newMap = leaflet.map(`map`, {
@@ -37,44 +38,37 @@ const CityMap = ({mapClassName, location, offers, activeCard, selectedOffer}) =>
 
   useEffect(() => {
     if (map) {
-      setMap((previousMapState) => previousMapState.setView([location.latitude, location.longitude], location.zoom));
+      map.setView([location.latitude, location.longitude], location.zoom);
     }
   }, [map, location]);
 
-  useEffect(() => {
-    if (map) {
-      if (markersLayer) {
-        setMap(map.removeLayer(markersLayer));
+  let icon;
+  if (mapClassName === `property`) {
+    useEffect(() => {
+      if (map) {
+        icon = activePin;
+        addIcon(selectedOffer.location.latitude, selectedOffer.location.longitude, icon);
+        offers.map((offer) => {
+          icon = inactivePin;
+          addIcon(offer.location.latitude, offer.location.longitude, icon);
+        });
       }
-      const newMarkersLayer = leaflet.layerGroup();
-      offers.map((offer) => {
-        newMarkersLayer.addLayer(addMarker(offer.location.latitude, offer.location.longitude, inactiveMarker));
-      });
-      setMarkersLayer(newMarkersLayer);
-      newMarkersLayer.addTo(map);
-    }
-  }, [map, location]);
-
-  useEffect(() => {
-    if (map) {
-      if (activeMarkerLayer) {
-        setMap(map.removeLayer(activeMarkerLayer));
+    });
+  } else {
+    useEffect(() => {
+      if (map) {
+        offers.map((offer) => {
+          icon = offer.id === activeCard ? activePin : inactivePin;
+          addIcon(offer.location.latitude, offer.location.longitude, icon);
+        });
       }
-      if (activeCard) {
-        console.log(map);
-      }
-    }
-  }, [activeCard]);
-
-  useEffect(() => {
-    // тут будет город заложен! Ну, надо придумать как подсветить активное предложение
-  });
+    });
+  }
 
   return (
     <section id="map" className={`${mapClassName}__map map`} />
   );
 };
-
 
 CityMap.propTypes = {
   mapClassName: PropTypes.string.isRequired,
@@ -84,7 +78,7 @@ CityMap.propTypes = {
     zoom: PropTypes.number.isRequired
   }).isRequired,
   offers: PropTypes.arrayOf(offerPropTypes.isRequired).isRequired,
-  activeCard: offerPropTypes,
+  activeCard: PropTypes.number,
   selectedOffer: offerPropTypes
 };
 

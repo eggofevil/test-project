@@ -15,14 +15,26 @@ const OfferCard = ({offerCardArticleClassName, offerCardDivClassName, offer, cha
       offer,
     }
   };
+
   const handleMouseEnter = () => {
-    changeActiveCard(offer.id);
+    changeActiveCard(offer);
   };
+
   const handleMouseLeave = () => {
     changeActiveCard();
   };
+
+  const articleArguments = {
+    className: `place-card ` + offerCardArticleClassName
+  };
+
+  if (offerCardArticleClassName === `cities__place-card`) {
+    articleArguments.onMouseEnter = handleMouseEnter;
+    articleArguments.onMouseLeave = handleMouseLeave;
+  }
+
   return (
-    <article className={`place-card ` + offerCardArticleClassName} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <article {...articleArguments}>
       {offer[`is_premium`] ? (
         <div className="place-card__mark">
           <span>Premium</span>
@@ -69,8 +81,8 @@ OfferCard.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  changeActiveCard(offerId) {
-    dispatch(setActiveCard(offerId));
+  changeActiveCard(offer) {
+    dispatch(setActiveCard(offer));
   }
 });
 

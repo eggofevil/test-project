@@ -5,7 +5,7 @@ export const setSortingType = (sortingType) => ({
   payload: sortingType
 });
 
-export const setActiveCard = (offerId = null) => ({
+export const setActiveCard = (offer = null) => ({
   type: SET_ACTIVE_CARD,
-  payload: offerId
+  payload: offer
 });

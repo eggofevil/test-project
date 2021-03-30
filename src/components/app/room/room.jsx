@@ -17,7 +17,7 @@ const Room = ({state: {offer}, nearbyOffers}) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getNearbyOffers(offer.id));
-  }, []);
+  }, [offer]);
   window.scroll(0, 0);
   return (
     <div className="page">
